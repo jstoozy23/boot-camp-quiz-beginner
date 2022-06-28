@@ -1,0 +1,57 @@
+nav {
+    display:flex;
+}
+
+nav div {
+    display:flex;
+    width: 50%;
+}
+
+ h1 {
+    display:flex;
+    justify-content: center;
+}
+.highscores {
+    justify-content: start;
+}
+
+.timer {
+    justify-content: end;
+}
+
+h1 {
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    height:135px;
+    width:800px;
+    background-color: steelblue;
+    font-size: 40px;
+}
+
+#startquestion {
+    display:flex;
+    flex-direction: column;
+    background-color: steelblue;
+    justify-content: center;
+    width:800px;
+    height:600px;
+}
+
+#startquestion p { 
+     height:100px; 
+ }
+
+#questionwindow {
+    display:flex;
+    flex-direction: column;
+    background-color: steelblue;
+    justify-content: center;
+    width:800px;
+    height:600px;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+}
