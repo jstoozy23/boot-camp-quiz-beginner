@@ -1,4 +1,6 @@
 var startBtn = document.getElementById("start");
+var submitBtn = document.getElementById("submit");
+var userName = document.getElementById("username");
 
 var question = document.getElementById("question");
 var answerA = document.getElementById("answera");
@@ -7,62 +9,62 @@ var answerC = document.getElementById("answerc");
 var answerD = document.getElementById("answerd");
 
 var currentTime = document.getElementById("timer");
+var highScore = document.getElementById("highscore")
 var secondsLeft ;
 
-var startScreen = document.getElementById("startquestion")
+var startScreen = document.getElementById("startquestion");
 var questionWindow = document.getElementById("questionwindow");
+var scoreScreen = document.getElementById("scorescreen");
 
 var questionsList = [
     {
-        question: "Test 1",
-        answera: "yes",
-        answerb: "no",
-        answerc: "no",
-        answerd: "no",
-        correct: "a",
+        question: "In which city is the University of Arizona located?",
+        answera: "Tucson",
+        answerb: "Prescot",
+        answerc: "Tempe",
+        answerd: "Bisbee",
     },
       {
-        question: "Test 2",
-        answera: "no",
-        answerb: "yes",
-        answerc: "no",
-        answerd: "no",
-        correct: "b",
+        question: "In which state is the Grand Canyon located?",
+        answera: "Colorado",
+        answerb: "Arizona",
+        answerc: "Michigan",
+        answerd: "California",
     },
     {
-        question: "Test 3",
-        answera: "no",
-        answerb: "no",
-        answerc: "yes",
-        answerd: "no",
-        correct: "c",
+        question: "What is the mascot of the University of Arizona",
+        answera: "Lions",
+        answerb: "Tigers",
+        answerc: "Wildcats",
+        answerd: "Bears",
     },
     {
-        question: "Test 4",
-        answera: "no",
-        answerb: "no",
-        answerc: "no",
-        answerd: "yes",
-        correct: "d",
+        question: "What is the first name of our TA?",
+        answera: "Jim",
+        answerb: "Curt",
+        answerc: "Darren",
+        answerd: "Chris",
     },
 ];
 
-function startQuiz() {
+function startQuiz(time) {
     startBtn.removeEventListener("click", startQuiz);
     secondsLeft = 100;
     startScreen.setAttribute("style", "display:none");
     container.setAttribute("style", "display:block");
 
-    setInterval(function() {
+    var time = setInterval(function() {
        currentTime.textContent = secondsLeft;
        secondsLeft --;
-        if (secondsLeft === 0){
-            clearInterval(timer)
+        if (secondsLeft <= 0 ){
+            clearInterval(time);
+            endQuiz();
         }
         }, 1000);
-
-        question1();
+            
 }  
+
+question1();
 
 function minus10(){
     secondsLeft = secondsLeft - 10;
@@ -77,21 +79,16 @@ function question1(){
         answerB.innerHTML = questionlist1.answerb;
         answerC.innerHTML = questionlist1.answerc;
         answerD.innerHTML = questionlist1.answerd;
-        questionWindow.addEventListener("click", answer1)
+        questionWindow.addEventListener("click", answer1);
 }
 
 function answer1 (click){ 
     var target = click.target       
-    // if (target == answerA){
-    //         question2();
-    // }
-     // else 
      if (target != answerA) { 
            minus10(); 
-        //    question2();   
         }
     question2();
-    questionWindow.removeEventListener("click", answer1)
+    questionWindow.removeEventListener("click", answer1);
 }
 
     
@@ -105,20 +102,16 @@ function question2() {
     answerB.innerHTML = questionlist2.answerb;
     answerC.innerHTML = questionlist2.answerc;
     answerD.innerHTML = questionlist2.answerd;
-    questionWindow.addEventListener("click", answer2)
+    questionWindow.addEventListener("click", answer2);
 }
 
 function answer2 (click){
     var target = click.target    
-    // if (target == answerB){
-    //         question3();
-    //     }   else 
         if (target != answerB) { 
-            minus10(); 
-         //   question3();   
+            minus10();   
         }
      question3();  
-    questionWindow.removeEventListener("click", answer2)   
+    questionWindow.removeEventListener("click", answer2);   
  }
 
 function question3() {
@@ -130,20 +123,16 @@ function question3() {
     answerB.innerHTML = questionlist3.answerb;
     answerC.innerHTML = questionlist3.answerc;
     answerD.innerHTML = questionlist3.answerd;
-    questionWindow.addEventListener("click", answer3)
+    questionWindow.addEventListener("click", answer3);
 } 
 
 function answer3(click){
     var target = click.target
-    //  if (target == answerC){
-    //      question4();
-    // }   else
      if (target != answerC) {  
-        minus10(); 
-       // question4();   
+        minus10();  
     }
-     question4()   
-    questionWindow.removeEventListener("click", answer3)    
+     question4();   
+    questionWindow.removeEventListener("click", answer3);    
 }
 
 function question4() {
@@ -155,19 +144,27 @@ function question4() {
     answerB.innerHTML = questionlist4.answerb;
     answerC.innerHTML = questionlist4.answerc;
     answerD.innerHTML = questionlist4.answerd; 
-    questionWindow.addEventListener("click" , answer4)
+    questionWindow.addEventListener("click" , answer4);
 }
 
 function answer4(click){
     var target = click.target
-        // if (target == answerD){
-        //     clearInterval(timer);
-        // }   else 
-        if (target != answerD) { 
-            minus10(); 
-            clearInterval(timer);   
+  if (target != answerD) { 
+            minus10();   
         }
+    endQuiz();
+    questionWindow.removeEventListener("click", answer4);
 } 
+
+function endQuiz(time){
+    clearInterval(time);
+    
+    questionWindow.setAttribute("style", "display:none");
+    scoreScreen.setAttribute("style", "display:block");
+    
+    highScore.textContent = userName.input;
+    currentTime.textContent = secondsLeft;
+}
 
 startBtn.addEventListener("click", startQuiz);
 
